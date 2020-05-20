@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css\istyle.css">
+<style>
+div#test{ border:#000 1px solid; padding:10px 40px 40px 40px; }
+</style></head><body>
+
+<script>
+var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0,percent;
+var questions = [
+    [ "1. You are facing problems with making decisions.", "Completely agree", "Completely disagree", "Neutral", "A" ],
+	[ "2. You have lost interest in all things that were important to you once upon a time.","Completely agree", "Completely disagree", "Neutral", "A"  ],
+	[ "3. You are having trouble in all your relationships(work and personal both).", "Completely agree", "Completely disagree", "Neutral", "A" ],
+	[ "4. You feel disappointed with your life.", "Completely agree", "Completely disagree", "Neutral", "A" ],
+	[ "5. You have lost or gained weight without changing your apetite.", "Completely agree", "Completely disagree", "Neutral", "A" ],
+	[ "6.Do you ever feel that you’ve been affected by feelings of edginess, anxiety, or nerves?","Yes", "No", "Sometimes,maybe", "A"  ],
+	[ "7. You feel, your life is sad, as there is no joy in your life anymore.", "Completely agree", "Completely disagree", "Neutral", "A" ],
+	[ "8. All the tasks you have performed, are taking much more time than usual.","Completely agree", "Completely disagree",  "Neutral", "A" ],
+	[ "9. You are thinking everything you have done has been a failure.", "Completely agree", "Completely disagree", "Neutral", "A" ],
+	[ "10.You have been very irritated and angry recently.","Completely agree", "Completely disagree", "Neutral", "A"  ],
+	[ "11.How relaxed do I feel most of the time, out of 10?", "More than five", "Less than five", "Five", "A" ],
+	[ "12.Tell me about your sleeping habits over the past X months. Have you noticed any changes?", "Yes", "No", "Not sure", "A" ],
+    [ "13.Do you feel like you're maintaining a healthy balance between leisure, myself, my career, physical activity, and those you care about?", "Yes", "No", "I'm not sure", "A" ],
+	[ "14.How often during the past X months have you felt as though your moods, or your life, were under your control?","Everytime", "Never", "Not sure", "A"  ],
+	[ "15.Have you ever experienced a terrible occurrence that has impacted you significantly? Examples may include, but aren’t necessarily limited to: being the victim of armed assault; witnessing a tragedy happen to someone else; surviving a sexual assault, or living through a natural disaster?", "Yes", "No", "I don't remember", "A" ],
+	
+];
+function _(x){
+	return document.getElementById(x);
+}
+function renderQuestion(){
+	test = _("test");
+	if(pos >= questions.length){
+		percent= correct/15*100;
+		if( correct>8)
+		test.innerHTML = "<h2> We are very sorry to inform you that You are in "+percent+"% depression. We HEALTH SUPPORT are here to help you with everything possible.</h2>";
+	else
+		test.innerHTML="<h2> Congralutions! You are living a healthy life.</h2>";
+		_("test_status").innerHTML = "Test Completed";
+		pos = 0;
+		correct = 0;
+		return false;
+	}
+	
+	question = questions[pos][0];
+	chA = questions[pos][1];
+	chB = questions[pos][2];
+	chC = questions[pos][3];
+	test.innerHTML = "<h3>"+question+"</h3>";
+	test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br><br>";
+	test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+}
+
+function checkAnswer(){
+	choices = document.getElementsByName("choices");
+	for(var i=0; i<choices.length; i++){
+		if(choices[i].checked){
+			choice = choices[i].value;
+		}
+	}
+	if(choice == questions[pos][4]){
+		correct++;
+	}
+	pos++;
+	renderQuestion();
+}
+window.addEventListener("load", renderQuestion, false);
+</script>
+
+		<div class="header">
+		 
+ 	 <h1><b>HEALTH SUPPORT </b></h1></div>
+ 	 	 <div class="toggle">
+		<button type="button" class="but"><a href="slideshow.html" class="first" style="color: black;">HOME</a></button>
+        <button type="button" class="but"><a href="i.html" class="menu" style="color: black;">TEST</a></button>
+ 	 	<button type="button" class="but"><a href="moreinfo.html" class="menu" style="color: black;">MORE INFO</a></button>
+ 	 
+ 	 	<button type="button" class="but"><a href="news.html" class="menu" style="color: black;">NEWS</a></button>
+ 	 	<button type="button" class="but"><a href="lifestyle.html" class="menu" style="color:black ;">LIFESTYLE</a></button>
+ 	 	<button type="button" class="but"><a href="g1.html" class="last" style="color: black;">GALLERY</a></button>
+ 	 	<button type="button" class="but"><a href="contact.html" class="last" style="color: black;">CONTACT</a></button></div>
+<h2 id="test_status"></h2>
+<div id="test"></div>
+</body>
+</html>
